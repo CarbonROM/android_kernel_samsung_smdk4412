@@ -924,12 +924,18 @@ static struct dentry *__d_make_root(struct inode *root_inode)
 	return d_make_root(root_inode);
 }
 
+//static void __exfat_do_truncate(struct inode *inode, loff_t old, loff_t new)
+//{
+//	down_write(&EXFAT_I(inode)->truncate_lock);
+//	truncate_setsize(inode, new);
+//	exfat_truncate(inode, old);
+//	up_write(&EXFAT_I(inode)->truncate_lock);
+//}
+
 static void __exfat_do_truncate(struct inode *inode, loff_t old, loff_t new)
 {
-	down_write(&EXFAT_I(inode)->truncate_lock);
-	truncate_setsize(inode, new);
-	exfat_truncate(inode, old);
-	up_write(&EXFAT_I(inode)->truncate_lock);
+		truncate_setsize(inode, new);
+		exfat_truncate(inode, old);
 }
 
 static sector_t exfat_aop_bmap(struct address_space *mapping, sector_t block)
